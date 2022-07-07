@@ -115,11 +115,95 @@
 -   Primero, crearemos un hola mundo en PHP y lo deplegaremos en una aplicación Heroku.
 
     -   Paso 01: Crear una nueva aplicación en el dashboard de heroku: https://dashboard.heroku.com/apps
+        ![NEW-APP-HEROKU](imagenes/heroku-new-app.png)
+        ![CREATE-NEW-APP-HEROKU](imagenes/heroku-create-new-app.png)
+
+    -   Paso 02: Crear un proyecto web básico en PHP .
+        ```sh
+        mkdir ejemplo-php-heroku
+        cd ejemplo-php-heroku
+        echo "<h1> Ejemplo PHP para Heroku </h1>" > home.html
+        echo '<?php include_once("home.html"); ?>' > index.php
+        echo '{}' > composer.json        
+        ```
+        ```sh
+        tree .
+        .
+        ├── composer.json
+        ├── home.html
+        └── index.php
+        ```
+    -   Paso 03: Desplegar la WebApp en la aplicación Heroku. Para esto debes ubicarte en el ROOT de tu aplicación.
+        ```sh
+        heroku login
+        git init        
+        ```
+        ```sh
+        Inicializado repositorio Git vacío en /home/richart/.../ejemplo-php-heroku/.git/
+        ```
+        ```sh
+        heroku git:remote -a ejemplo-php-heroku-pw2
+        ```
+        ```sh
+        set git remote heroku to https://git.heroku.com/ejemplo-php-heroku-pw2.git
+        ```
+        ```sh
+        git add .
+        git commit -am "make it better"
+        git push heroku main:master
+        ```
+        ```sh
+        Enumerando objetos: 5, listo.
+        Contando objetos: 100% (5/5), listo.
+        Compresión delta usando hasta 12 hilos
+        Comprimiendo objetos: 100% (2/2), listo.
+        Escribiendo objetos: 100% (5/5), 390 bytes | 390.00 KiB/s, listo.
+        Total 5 (delta 0), reusado 0 (delta 0), pack-reusado 0
+        remote: Compressing source files... done.
+        remote: Building source:
+        remote: 
+        remote: -----> Building on the Heroku-20 stack
+        remote: -----> Determining which buildpack to use for this app
+        remote: -----> PHP app detected
+        remote: -----> Bootstrapping...
+        remote: -----> Preparing platform package installation...
+        remote:        NOTICE: No runtime required in composer.lock; using PHP ^7.3.0 | ^8.0.0
+        remote: -----> Installing platform packages...
+        remote:        - apache (2.4.54)
+        remote:        - php (8.1.8)
+        remote:        - composer (2.2.16)
+        remote:        - nginx (1.22.0)
+        remote: -----> Installing dependencies...
+        remote:        Composer version 2.2.16 2022-07-05 16:50:29
+        remote: -----> Preparing runtime environment...
+        remote:        NOTICE: No Procfile, using 'web: heroku-php-apache2'.
+        remote: -----> Checking for additional extensions to install...
+        remote: -----> Discovering process types
+        remote:        Procfile declares types -> web
+        remote: 
+        remote: -----> Compressing...
+        remote:        Done: 15.5M
+        remote: -----> Launching...
+        remote:        Released v3
+        remote:        https://ejemplo-php-heroku-pw2.herokuapp.com/ deployed to Heroku
+        remote: 
+        remote: This app is using the Heroku-20 stack, however a newer stack is available.
+        remote: To upgrade to Heroku-22, see:
+        remote: https://devcenter.heroku.com/articles/upgrading-to-the-latest-stack
+        remote: 
+        remote: Verifying deploy... done.
+        To https://git.heroku.com/ejemplo-php-heroku-pw2.git
+        * [new branch]      main -> master
+        ```
+    -   Ya deberiamos tener la aplicación web deployada: https://ejemplo-php-heroku-pw2.herokuapp.com/ 
+
 
 
 ## EJERCICIOS PROPUESTOS
 
-1.  En el framework para desarrollo de aplicaciones web que esta estudiando. 
+1.  Desplique en Heroku un hola mundo en Django.
+
+2.  En el framework para desarrollo de aplicaciones web que esta estudiando. 
     -   Cree los CRUDS para modelo de su proyecto.  
     -   Personalize sus plantillas.
     -   Y publíque su WebApp en la plataforma Heroku.
